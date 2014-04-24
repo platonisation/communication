@@ -38,43 +38,73 @@ ssize_t Writeline(int sockd, const void *vptr, ssize_t n) {
 
 /*  Read a line from a socket  */
 
-int Readline(int sockd, char* buffer, ssize_t maxlen) {
+int Readline(int sockd, void *vptr, ssize_t maxlen) {
 
-	//data to read
-	unsigned char start;
-	unsigned char src[4];
-	unsigned char dst[4];
-	unsigned char size;
-	unsigned char data[20];
+//	//data to read
+//	unsigned char start;
+//	unsigned char src[4];
+//	unsigned char dst[4];
+//	unsigned char size;
+//	unsigned char data[20];
+//
+//	//treat data
+//	read(sockd, &start, 1);
+//	if (start == 0xFE) {
+////			read(sockd,src,4);
+////			read(sockd,dst,4);
+//		read(sockd,&size,1);
+//		printf("size:%d\n",size);
+//		//size in bytes
+//		if(size < 10000000){//10Mo, msg
+//			if((read(sockd,buffer,size) != size)){
+//				//Lecture ok
+//				printf("Cannot read %d datas\n",size);
+//			}
+//			else {
+//				printf("%s",buffer);
+////				doAction(buffer,size);
+//			}
+//
+//		}
+//		else { // files
+//			//attention bug ! client envoie coucou trouve un fichier
+//			printf("This is a file\n");
+//		}
+//	}
+//	else {
+//		printf("Not a starting sequence\n");
+//	}
+//	return 1;
 
-	//treat data
-	read(sockd, &start, 1);
-	if (start == 0xFE) {
-//			read(sockd,src,4);
-//			read(sockd,dst,4);
-		read(sockd,&size,1);
-		printf("size:%d\n",size);
-		//size in bytes
-		if(size < 10000000){//10Mo, msg
-			if((read(sockd,buffer,size) != size)){
-				//Lecture ok
-				printf("Cannot read %d datas\n",size);
-			}
-			else {
-				printf("%s",buffer);
-//				doAction(buffer,size);
-			}
+	 ssize_t n, rc;
+	    char    c, *buffer;
 
+	    buffer = vptr;
+
+	    for ( n = 1; n < maxlen; n++ ) {
+
+		if ( (rc = read(sockd, &c, 1)) == 1 ) {
+		    *buffer++ = c;
+		    if ( c == '\n' )
+			break;
 		}
-		else { // files
-			//attention bug ! client envoie coucou trouve un fichier
-			printf("This is a file\n");
+		else if ( rc == 0 ) {
+		    if ( n == 1 )
+			return 0;
+		    else
+			break;
 		}
-	}
-	else {
-		printf("Not a starting sequence\n");
-	}
-	return 1;
+		else {
+		    if ( errno == EINTR )
+			continue;
+		    return -1;
+		}
+	    }
+
+	    *buffer = 0;
+	    return n;
+
+
 }
 
 char* parseMessage(char* buffer, int size) {
