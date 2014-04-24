@@ -19,7 +19,7 @@
 #define debugTrace(string) printf("\n%s\n",string);
 
 int ParseCmdLine(int argc, char *argv[], char **szAddress, char **szPort);
-int Readline(int sockd, char* buffer, ssize_t maxlen);
+int Readline(int sockd, void *vptr, ssize_t maxlen);
 ssize_t Writeline(int sockd, const void *vptr, ssize_t n);
 char* parseMessage(char* buffer, int size) ;
 
