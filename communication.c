@@ -5,9 +5,11 @@
  *      Author: tbn
  */
 
-
-
 #include "communication.h"
+
+/*Create unparse methode*/
+/*recuperer read line standrad*/
+
 
 /*  Write a line to a socket  */
 
