@@ -7,14 +7,14 @@
 
 #include "communication.h"
 
-/*Create unparse methode*/
-/*recuperer read line standrad*/
+/*Create unparsed method*/
+/*get read line standard*/
 
 
 /*  Write a line to a socket  */
 
-ssize_t Writeline(int sockd, const void *vptr, size_t n) {
-    size_t      nleft;
+ssize_t Writeline(int sockd, const void *vptr, ssize_t n) {
+	ssize_t      nleft;
     ssize_t     nwritten;
     const char *buffer;
 
@@ -38,7 +38,7 @@ ssize_t Writeline(int sockd, const void *vptr, size_t n) {
 
 /*  Read a line from a socket  */
 
-int Readline(int sockd, char* buffer, size_t maxlen) {
+int Readline(int sockd, char* buffer, ssize_t maxlen) {
 
 	//data to read
 	unsigned char start;
@@ -62,7 +62,7 @@ int Readline(int sockd, char* buffer, size_t maxlen) {
 			}
 			else {
 				printf("%s",buffer);
-				doAction(buffer,size);
+//				doAction(buffer,size);
 			}
 
 		}

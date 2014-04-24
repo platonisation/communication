@@ -17,8 +17,8 @@
 #include <stdio.h>
 
 int ParseCmdLine(int argc, char *argv[], char **szAddress, char **szPort);
-int Readline(int sockd, char* buffer, size_t maxlen);
-ssize_t Writeline(int sockd, const void *vptr, size_t n);
+int Readline(int sockd, char* buffer, ssize_t maxlen);
+ssize_t Writeline(int sockd, const void *vptr, ssize_t n);
 char* parseMessage(char* buffer, int size) ;
 
 #endif /* COMMUNICATION_H_ */
