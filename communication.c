@@ -52,7 +52,7 @@ int Readline(int sockd, void *vptr, ssize_t maxlen) {
 		read(sockd,&size,1);
 		//size in bytes
 		if(size > 0){//10Mo, msg
-			vptr+=2;
+			read(sockd, vptr, size);
 		}
 		else { // files
 			//attention bug ! client envoie coucou trouve un fichier
