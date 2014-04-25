@@ -51,12 +51,12 @@ int Readline(int sockd, void *vptr, ssize_t maxlen) {
 	if (start == 0xFE) {
 		read(sockd,&size,1);
 		//size in bytes
-		if(size <= 0){//10Mo, msg
+		if(size > 0){//10Mo, msg
 			vptr+=2;
 		}
 		else { // files
 			//attention bug ! client envoie coucou trouve un fichier
-			debugTrace("Cannot read the message size.\n")
+			debugTrace("Cannot read the message size or = to 0.\n")
 			return -1;
 		}
 	}
