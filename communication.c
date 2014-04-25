@@ -83,22 +83,22 @@ int Readline(int sockd, void *vptr, ssize_t maxlen) {
 
 	    for ( n = 1; n < maxlen; n++ ) {
 
-		if ( (rc = read(sockd, &c, 1)) == 1 ) {
-		    *buffer++ = c;
-		    if ( c == '\n' )
-			break;
-		}
-		else if ( rc == 0 ) {
-		    if ( n == 1 )
-			return 0;
-		    else
-			break;
-		}
-		else {
-		    if ( errno == EINTR )
-			continue;
-		    return -1;
-		}
+			if ( (rc = read(sockd, &c, 1)) == 1 ) {
+				*buffer++ = c;
+				if ( c == '\0' )
+				break;
+			}
+			else if ( rc == 0 ) {
+				if ( n == 1 )
+				return 0;
+				else
+				break;
+			}
+			else {
+				if ( errno == EINTR )
+				continue;
+				return -1;
+			}
 	    }
 
 	    *buffer = 0;
