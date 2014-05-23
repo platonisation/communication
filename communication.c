@@ -47,8 +47,8 @@ int Readline(int sockd, void *vptr, ssize_t maxlen) {
 	unsigned char size;
 	unsigned char data[20];
 
-	read(sockd, &start, 1);
-	if (start == 0xFE) {
+//	read(sockd, &start, 1);
+//	if (start == 0xFE) {
 		read(sockd,&size,1);
 		//size in bytes
 		if(size > 0){//10Mo, msg
@@ -59,11 +59,11 @@ int Readline(int sockd, void *vptr, ssize_t maxlen) {
 			debugTrace("Cannot read the message size or = to 0.\n")
 			return -1;
 		}
-	}
-	else {
-		printf("Not a starting sequence\n");
-		return 0;
-	}
+//	}
+//	else {
+//		printf("Not a starting sequence\n");
+//		return 0;
+//	}
 	return size;
 
 //	unsigned char start = ctx->messageToReceive[0];
@@ -124,8 +124,8 @@ int Readline(int sockd, void *vptr, ssize_t maxlen) {
 char* parseMessage(char* buffer, int size) {
 	char* s;
 	s = malloc(size*sizeof(char) + 2);
-	s[0]=0xFE;
-	s[1]=strlen(buffer);
+//	s[0]=0xFE;
+	s[0]=strlen(buffer);
 	strcat(s,buffer);
 
 	return s;
