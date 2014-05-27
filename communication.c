@@ -49,23 +49,23 @@ int Readline(int sockd, void *vptr, ssize_t maxlen) {
 
 //	read(sockd, &start, 1);
 //	if (start == 0xFE) {
-		read(sockd,&size,1);
-		//size in bytes
-		if(size > 0){//10Mo, msg
-			read(sockd, vptr, size);
-			fclean(sockd);
-		}
-		else { // files
-			//attention bug ! client envoie coucou trouve un fichier
-			debugTrace("Cannot read the message size or = to 0.\n")
-			return -1;
-		}
+//		read(sockd,&size,1);
+//		//size in bytes
+//		if(size > 0){//10Mo, msg
+//			read(sockd, vptr, size);
+//			fclean(sockd);
+//		}
+//		else { // files
+//			//attention bug ! client envoie coucou trouve un fichier
+//			debugTrace("Cannot read the message size or = to 0.\n")
+//			return -1;
+//		}
 //	}
 //	else {
 //		printf("Not a starting sequence\n");
 //		return 0;
 //	}
-	return size;
+//	return size;
 
 //	unsigned char start = ctx->messageToReceive[0];
 	//	unsigned char size = ctx->messageToReceive[1];
@@ -90,34 +90,34 @@ int Readline(int sockd, void *vptr, ssize_t maxlen) {
 	//	return 1;
 
 
-//
-//	 ssize_t n, rc;
-//	    char    c, *buffer;
-//
-//	    buffer = vptr;
-//
-//	    for ( n = 1; n < maxlen; n++ ) {
-//
-//			if ( (rc = read(sockd, &c, 1)) == 1 ) {
-//				*buffer++ = c;
-//				if ( c == '\0' )
-//				break;
-//			}
-//			else if ( rc == 0 ) {
-//				if ( n == 1 )
-//				return 0;
-//				else
-//				break;
-//			}
-//			else {
-//				if ( errno == EINTR )
-//				continue;
-//				return -1;
-//			}
-//	    }
-//
-//	    *buffer = 0;
-//	    return n;
+
+	 ssize_t n, rc;
+	    char    c, *buffer;
+
+	    buffer = vptr;
+
+	    for ( n = 1; n < maxlen; n++ ) {
+
+			if ( (rc = read(sockd, &c, 1)) == 1 ) {
+				*buffer++ = c;
+				if ( c == '\0' )
+				break;
+			}
+			else if ( rc == 0 ) {
+				if ( n == 1 )
+					return 0;
+				else
+					return -2;
+			}
+			else {
+				if ( errno == EINTR )
+					continue;
+				return -1;
+			}
+	    }
+
+	    *buffer = 0;
+	    return n;
 
 
 }
