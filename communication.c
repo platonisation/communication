@@ -107,7 +107,8 @@ int Readline(int sockd, void *vptr, ssize_t maxlen) {
 				if ( n == 1 )
 					return 0;
 				else
-					return -2;
+					buffer[maxlen-1] = '\0';
+					//return -2;
 			}
 			else {
 				if ( errno == EINTR )
