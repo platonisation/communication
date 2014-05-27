@@ -131,6 +131,7 @@ char* parseMessage(char* buffer, int size) {
 	strcat(s,buffer);
 	s[strlen(buffer)] = '\0';
 
+
 	return s;
 }
 
