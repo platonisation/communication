@@ -101,7 +101,7 @@ int Readline(int sockd, void *vptr, ssize_t maxlen) {
 			if ( (rc = read(sockd, &c, 1)) == 1 ) {
 				*buffer++ = c;
 				if ( c == '\0' )
-				break;
+					break;
 			}
 			else if ( rc == 0 ) { //timeout
 				if ( n == 1 )
@@ -129,6 +129,7 @@ char* parseMessage(char* buffer, int size) {
 //	s[0]=0xFE;
 //	s[0]=strlen(buffer);
 	strcat(s,buffer);
+	s[strlen(buffer)] = '\0';
 
 	return s;
 }
