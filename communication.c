@@ -130,7 +130,7 @@ char* parseMessage(char* buffer, int size) {
 //	s[0]=strlen(buffer);
 	strcat(s,buffer);
 	s[size] = '\0';
-
+	free(buffer);
 
 	return s;
 }
