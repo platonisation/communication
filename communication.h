@@ -17,6 +17,7 @@
 #include <stdio.h>
 
 #define debugTrace(string) printf("\n%s\n",string);
+#define MAX_USR_LENGTH 		20
 
 int ParseCmdLine(int argc, char *argv[], char **szAddress, char **szPort, char * username);
 int Readline(int sockd, void *vptr, ssize_t maxlen);
