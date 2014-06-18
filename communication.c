@@ -22,7 +22,7 @@ ssize_t Writeline(int sockd, const void *vptr, ssize_t n) {
     nleft  = n;
 
     while ( nleft > 0 ) {
-	if ( (nwritten = send(sockd, buffer, nleft,0)) <= 0 ) {
+	if ( (nwritten = write(sockd, buffer, nleft)) <= 0 ) {
 	    if ( errno == EINTR )
 		nwritten = 0;
 	    else
