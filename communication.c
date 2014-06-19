@@ -1,10 +1,3 @@
-/*
- * communication.c
- *
- *  Created on: Apr 24, 2014
- *      Author: tbn
- */
-
 #include "communication.h"
 
 
@@ -54,7 +47,6 @@ int Readline(int sockd, void *vptr, ssize_t maxlen) {
 					return 0;
 				else
 					buffer[maxlen-1] = '\0';
-					//return -2;
 			}
 			else {
 				if ( errno == EINTR )

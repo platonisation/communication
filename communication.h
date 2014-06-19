@@ -1,10 +1,3 @@
-/*
- * communication.h
- *
- *  Created on: Apr 24, 2014
- *      Author: tbn
- */
-
 #ifndef COMMUNICATION_H_
 #define COMMUNICATION_H_
 
