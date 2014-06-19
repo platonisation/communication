@@ -126,6 +126,7 @@ int Readline(int sockd, void *vptr, ssize_t maxlen) {
 char* parseMessage(char* buffer, int size) {
 	char* s;
 	s = malloc(size+1*sizeof(char));
+	memset(s,0,size+1);
 //	s[0]=0xFE;
 //	s[0]=strlen(buffer);
 	strcat(s,buffer);
